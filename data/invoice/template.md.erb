@@ -1,0 +1,37 @@
+# Invoice <%= @inv_id%>
+
+__From:__ \hfill __Bill To:__
+
+<%= @sender["name"]%> \hfill <%= @recp["name"]%>
+
+<%= @sender["addr1"]%> \hfill <%= @recp["addr1"]%>
+
+<%= @sender["addr2"]%> \hfill <%= @recp["addr2"]%>
+
+<%= @sender["phone"]%> \hfill <%= @recp["phone"]%>
+
+<%= @sender["email"]%>
+
+\vspace{5 mm}
+
+__Dates:__ 2016-08-01 to 2016-08-31
+
+<% i = 0%>
+| __#__ | __Description__ | __Date / Time__ | __Total__ |
+|:-----:|:------------|------------:|------:|<% for item in @items%>
+| <%= i+=1%> | <%= item[1] +" | "+ item[0] +" | "+ ( "%0.2f" % item[2])%> |<%if item[3]%>
+|   | \  _<%= item[3]%>_ | | |<% end%>
+|   |                    | | |<% end%>
+|   | | Subtotal          | <%= "%0.2f" % @subtotal%> |
+|   | | <%=@tax["desc"]%> | <%= "%0.2f" % @sub_tax%>  |
+|   | | BN <%= "%08d" % @sender["bnum"]%> |          |
+|   | | Total             | <%= "%0.2f" % @total%>    |
+
+\vspace{5 mm}
+<%== if @closing
+	@closing
+end%>
+
+\vfill
+\center
+_-- Invoice generated automagically by ShiftShark @ shiftshark.ca --_

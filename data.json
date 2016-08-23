@@ -1,0 +1,39 @@
+{
+	"inv_id": "MYNY-1",
+	"date_range": [ "2016-08-01", "2016-08-31"],
+	"date_due": "2016-08-24",
+
+	"sender": {
+		"name": "Elliott Bettencourt",
+		"addr1": "2885 Bayview Ave",
+		"addr2": "Toronto, ON M2K 0A3",
+		"phone": "647.628.9909",
+		"email": "ellbetten@gmail.com",
+		"bnum": 816206445 },
+
+	"recp": {
+		"name": "Moksha Yoga North York",
+		"addr1": "100 Sheppard Ave East",
+		"addr2": "Toronto, ON M2N 6N5",
+		"phone": "416.225.6767" },
+
+	"tax": {
+		"rate": 0.13,
+		"desc": "HST @ 13%" },
+
+	"base_rate": 200.00,
+	"items": [
+		[ "2016-08-01 17:30", "MYNY 90 min Moksha", 300.00],
+		[ "2016-08-02 17:30", "MYNY 90 min Moksha"],
+		[ "2016-08-07 15:00", "MYNY 120 min Mindfulness Workshop", 1000.00,
+			"Joint workshop with Guru Khetophis of Grekka."] ],
+	"cal_source": "https://calendar.google.com/calendar/ical/g2ir41g91u66v8k30frpn9unqg%40group.calendar.google.com/public/basic.ics",
+
+	"closing": "Pwease make all cheques payable to Elliott Bettencourt.
+
+Payment is due within 30 days.
+
+If you have any questions concerning this invoice, contact Elliott.
+
+Thank you for your business!"
+}
