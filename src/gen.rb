@@ -2,6 +2,7 @@
 
 require 'erubis'
 require 'icalendar'
+require 'icalendar/recurrence'
 require 'net/http'
 require 'oj'
 require 'pandoc-ruby'
@@ -39,11 +40,34 @@ class InvoiceGen
 	end
 
 	def load_items( ical)
-		for event in ical.first.events
-			puts event.dtstart
-			@data["items"] << [ event.summary, event.dtstart]
-			break
+		range = []
+		for x in @data["date_range"]
+			range << Date.parse( x)
 		end
+
+		events = []
+		for event in ical.first.events
+			summary = event.summary
+			events += event.occurrences_between( range[0], range[1])
+				.map{ |x| x.start_time}
+				.select{ |x| ! event.exdate.include?( x)}
+				.map{ |x| x.to_datetime + Rational( @data["time_buffer"], 24*60)}
+				.map{ |x| [ summary, x.to_time.strftime( "%F %R")]}
+		end
+		events.sort_by! { |x| x[1]}
+
+		if false
+			dt = event.dtstart
+			event_date = dt.to_date
+			if ! ( range[0] <= event_date && event_date <= range[1])
+				puts "something removed!"
+			end
+			dt = dt.to_time.strftime( "%F %R")
+
+			@data["items"] << [ event.summary, dt]
+		end
+
+		@data["items"] += events
 	end
 
 	def complete()
@@ -71,6 +95,7 @@ class InvoiceGen
 			markdown,
 			{ f: :markdown, to: :latex},
 			{ template: @template_tex},
+			{ V: "geometry:margin=3cm"},
 			{ o: @output})
 	end
 
@@ -89,6 +114,20 @@ DEFAULT_ARGS = {
 
 def parse_args( argv)
 	args = DEFAULT_ARGS.dup
+
+	while ! argv.empty?
+		arg = argv.shift
+		case arg
+		when "-d"
+			args[:source] = argv.shift
+		when "-t"
+			args[:template] = argv.shift
+		when "-o"
+			args[:output] = argv.shift
+		else
+			args[:source] = arg
+		end
+	end
 
 	return args
 end
