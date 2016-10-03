@@ -9,7 +9,11 @@ freshen: clean default
 invoices = \
 	bin/invoice-myny-1600035.pdf \
 	bin/invoice-myth-1600036.pdf \
-	bin/invoice-myu-1600037.pdf
+	bin/invoice-myu-1600037.pdf \
+	bin/invoice-myny-1600038.pdf \
+	bin/invoice-myth-1600039.pdf \
+	bin/invoice-myu-1600040.pdf \
+	bin/invoice-mya-1600041.pdf
 
 # defs
 gen: bin/invoice-myny-1600035.pdf

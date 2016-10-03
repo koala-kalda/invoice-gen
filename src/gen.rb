@@ -40,34 +40,35 @@ class InvoiceGen
 	end
 
 	def load_items( ical)
-		range = []
-		for x in @data["date_range"]
-			range << Date.parse( x)
-		end
+		r0 = Date.parse( @data["date_range"][0])
+		r1 = Date.parse( @data["date_range"][1])
 
-		events = []
+		prep = {}
 		for event in ical.first.events
 			summary = event.summary
-			events += event.occurrences_between( range[0], range[1])
-				.map{ |x| x.start_time}
-				.select{ |x| ! event.exdate.include?( x)}
-				.map{ |x| x.to_datetime + Rational( @data["time_buffer"], 24*60)}
-				.map{ |x| [ summary, x.to_time.strftime( "%F %R")]}
-		end
-		events.sort_by! { |x| x[1]}
+			uid = event.uid
+			last_mod = event.last_modified
 
-		if false
-			dt = event.dtstart
-			event_date = dt.to_date
-			if ! ( range[0] <= event_date && event_date <= range[1])
-				puts "something removed!"
+			new_events = event.occurrences_between( r0, r1)
+				.select{ |x| ! event.exdate.include?( x.start_time)}
+
+			for occ in new_events
+				dt = occ.start_time.to_datetime +
+					Rational( @data["time_buffer"], 24*60)
+				dt = dt.to_time.strftime( "%F %R")
+
+				key = uid + dt
+				val = [ last_mod, [ summary, dt]]
+				if prep[key].nil?
+					prep[key] = val
+				elsif last_mod > prep[key][0]
+					prep[key] = val
+				end
 			end
-			dt = dt.to_time.strftime( "%F %R")
-
-			@data["items"] << [ event.summary, dt]
 		end
 
-		@data["items"] += events
+		@data["items"] += prep.values.map{ |x| x[1]}
+		@data["items"].sort_by!{ |x| x[1]}
 	end
 
 	def complete()
@@ -95,7 +96,7 @@ class InvoiceGen
 			markdown,
 			{ f: :markdown, to: :latex},
 			{ template: @template_tex},
-			{ V: "geometry:margin=3cm"},
+			{ V: "geometry:left=3cm,right=3cm,top=3.5cm,bottom=3.5cm"},
 			{ o: @output})
 	end
 
