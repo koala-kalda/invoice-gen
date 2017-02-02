@@ -96,7 +96,7 @@ class InvoiceGen
 			markdown,
 			{ f: :markdown, to: :latex},
 			{ template: @template_tex},
-			{ V: "geometry:left=3cm,right=3cm,top=3.5cm,bottom=3.5cm"},
+			{ V: "geometry:left=3.5cm,right=3.5cm,top=3.0cm,bottom=3.0cm"},
 			{ o: @output})
 	end
 

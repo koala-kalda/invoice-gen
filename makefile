@@ -7,17 +7,14 @@ freshen: clean default
 
 # vars
 invoices = \
-	bin/invoice-myny-1600035.pdf \
-	bin/invoice-myth-1600036.pdf \
-	bin/invoice-myu-1600037.pdf \
-	bin/invoice-myny-1600038.pdf \
-	bin/invoice-myth-1600039.pdf \
-	bin/invoice-myu-1600040.pdf \
-	bin/invoice-mya-1600041.pdf
+	bin/invoice-dac-1600061.pdf \
+	bin/invoice-mya-1600059.pdf \
+	bin/invoice-mynm-1600060.pdf \
+	bin/invoice-myny-1600056.pdf \
+	bin/invoice-myth-1600057.pdf \
+	bin/invoice-myu-1600058.pdf
 
 # defs
-gen: bin/invoice-myny-1600035.pdf
-
 invoices: $(invoices)
 $(invoices): bin/invoice-%.pdf : data/elliott/%.json \
 		data/invoice/template.md.erb \
@@ -30,11 +27,7 @@ $(invoices): bin/invoice-%.pdf : data/elliott/%.json \
 
 # other
 test:
-	evince bin/invoice-myny-1600035.pdf
-test2:
-	evince bin/invoice-myth-1600036.pdf
-test3:
-	evince bin/invoice-myu-1600037.pdf
+	evince bin/*.pdf
 
 ci:
 	make-ci all \
