@@ -17,15 +17,15 @@ __From:__ \hfill __Bill To:__
 __Dates:__ <%= @date_range[0]%> to <%= @date_range[1]%>
 
 <% i = 0%>
-| __#__ | __Description__ \hspace{1mm} | __Date / Time__ | __Total__ |
+| __#__ | __Description__ \hspace{60mm} | __Date / Time__ | __Total__ |
 |:-----:|:------------|------------:|------:|<% for item in @items%>
 | <%= i+=1%> | <%= item[0] +" | "+ item[1] +" | "+ ("%0.2f" % item[2])%> |<%if item[3]%>
-|       | \  _<%= item[3]%>_ | | |<% end%>
-|       |                    | | |<% end%>
-|       | | Subtotal          | <%= "%0.2f" % @subtotal%> |
-|       | | <%=@tax["desc"]%> | <%= "%0.2f" % @sub_tax%>  |
-|       | | BN <%= "%08d" % @sender["bnum"]%> |           |
-|       | | Total             | <%= "%0.2f" % @total%>    |
+| \space | \  _<%= item[3]%>_ | \space | \space |<% end%>
+| \space | \space | \space    | \space |<% end%>
+| \space | \space | Subtotal  | <%= "%0.2f" % @subtotal%> |
+| \space | \space | <%=@tax["desc"]%> | <%= "%0.2f" % @sub_tax%>  |
+| \space | \space | BN <%= "%08d" % @sender["bnum"]%> | \space |
+| \space | \space | Total             | <%= "%0.2f" % @total%>    |
 
 <% if @closing %>
 \vspace{5mm}

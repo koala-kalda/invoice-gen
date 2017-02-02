@@ -29,6 +29,12 @@ $(invoices): bin/invoice-%.pdf : data/elliott/%.json \
 test:
 	evince bin/*.pdf
 
+asdf.pdf: asdf.md
+	pandoc asdf.md -o asdf.pdf
+test-asdf: asdf.pdf
+	evince asdf.pdf
+
+
 ci:
 	make-ci all \
 		data/elliott/* \
