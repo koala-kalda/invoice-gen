@@ -7,12 +7,18 @@ freshen: clean default
 
 # vars
 invoices = \
-	bin/invoice-dac-1600061.pdf \
-	bin/invoice-mya-1600059.pdf \
-	bin/invoice-mynm-1600060.pdf \
-	bin/invoice-myny-1600056.pdf \
-	bin/invoice-myth-1600057.pdf \
-	bin/invoice-myu-1600058.pdf
+	bin/invoice-dac-1600073.pdf \
+	bin/invoice-dac-1600079.pdf \
+	bin/invoice-mya-1600071.pdf \
+	bin/invoice-mya-1600077.pdf \
+	bin/invoice-mynm-1600072.pdf \
+	bin/invoice-mynm-1600078.pdf \
+	bin/invoice-myny-1600068.pdf \
+	bin/invoice-myny-1600074.pdf \
+	bin/invoice-myth-1600069.pdf \
+	bin/invoice-myth-1600075.pdf \
+	bin/invoice-myu-1600070.pdf \
+	bin/invoice-myu-1600076.pdf
 
 # defs
 invoices: $(invoices)
@@ -20,7 +26,7 @@ $(invoices): bin/invoice-%.pdf : data/elliott/%.json \
 		data/invoice/template.md.erb \
 		data/invoice/template.tex \
 		src/gen.rb
-	src/gen.rb \
+	bundle exec src/gen.rb \
 		$< \
 		-t data/invoice/ \
 		-o $@

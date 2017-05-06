@@ -1,0 +1,28 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    erubis (2.7.0)
+    icalendar (2.4.1)
+    icalendar-recurrence (1.1.2)
+      icalendar (~> 2.0)
+      ice_cube (~> 0.13)
+    ice_cube (0.16.1)
+    oj (2.18.5)
+    pandoc-ruby (2.0.1)
+    thread_safe (0.3.6)
+    tzinfo (1.2.3)
+      thread_safe (~> 0.1)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  erubis (~> 2.7)
+  icalendar (~> 2.4)
+  icalendar-recurrence (~> 1.1)
+  oj (~> 2.18)
+  pandoc-ruby (~> 2.0)
+  tzinfo (~> 1.2)
+
+BUNDLED WITH
+   1.14.6

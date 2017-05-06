@@ -9,6 +9,8 @@ require 'pandoc-ruby'
 
 
 class InvoiceGen
+	attr_accessor :data
+
 	def initialize( args)
 		self.config( args)
 	end
@@ -48,12 +50,14 @@ class InvoiceGen
 			summary = event.summary
 			uid = event.uid
 			last_mod = event.last_modified
-
+			exdate = event.exdate.map{ |x| x.to_time}
 			new_events = event.occurrences_between( r0, r1)
-				.select{ |x| ! event.exdate.include?( x.start_time)}
+				.select{ |x| ! exdate.include?( x.start_time - 4*3600)}
+				#.select{ |x| ! exdate.include?( x.start_time)}
+				#.select{ |x| ! exdate.include?( x.start_time - 5*3600)}
 
 			for occ in new_events
-				dt = occ.start_time.to_datetime +
+				dt = ( occ.start_time - 4*3600).to_datetime +
 					Rational( @data["time_buffer"], 24*60)
 				dt = dt.to_time.strftime( "%F %R")
 
@@ -61,7 +65,7 @@ class InvoiceGen
 				val = [ last_mod, [ summary, dt]]
 				if prep[key].nil?
 					prep[key] = val
-				elsif last_mod > prep[key][0]
+				elsif last_mod > prep[key][0].to_datetime
 					prep[key] = val
 				end
 			end
