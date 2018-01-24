@@ -6,11 +6,11 @@ GEM
     icalendar-recurrence (1.1.2)
       icalendar (~> 2.0)
       ice_cube (~> 0.13)
-    ice_cube (0.16.1)
-    oj (2.18.5)
-    pandoc-ruby (2.0.1)
+    ice_cube (0.16.2)
+    oj (3.3.10)
+    pandoc-ruby (2.0.2)
     thread_safe (0.3.6)
-    tzinfo (1.2.3)
+    tzinfo (1.2.4)
       thread_safe (~> 0.1)
 
 PLATFORMS
@@ -20,9 +20,9 @@ DEPENDENCIES
   erubis (~> 2.7)
   icalendar (~> 2.4)
   icalendar-recurrence (~> 1.1)
-  oj (~> 2.18)
+  oj (~> 3.3)
   pandoc-ruby (~> 2.0)
   tzinfo (~> 1.2)
 
 BUNDLED WITH
-   1.14.6
+   1.16.1

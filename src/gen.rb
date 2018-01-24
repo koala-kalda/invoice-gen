@@ -52,12 +52,12 @@ class InvoiceGen
 			last_mod = event.last_modified
 			exdate = event.exdate.map{ |x| x.to_time}
 			new_events = event.occurrences_between( r0, r1)
-				.select{ |x| ! exdate.include?( x.start_time - 4*3600)}
+				.select{ |x| ! exdate.include?( x.start_time - 5*3600)}
 				#.select{ |x| ! exdate.include?( x.start_time)}
-				#.select{ |x| ! exdate.include?( x.start_time - 5*3600)}
+				#.select{ |x| ! exdate.include?( x.start_time - 4*3600)}
 
 			for occ in new_events
-				dt = ( occ.start_time - 4*3600).to_datetime +
+				dt = ( occ.start_time - 5*3600).to_datetime +
 					Rational( @data["time_buffer"], 24*60)
 				dt = dt.to_time.strftime( "%F %R")
 
