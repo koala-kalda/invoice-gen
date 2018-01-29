@@ -51,6 +51,7 @@ class InvoiceGen
 			uid = event.uid
 			last_mod = event.last_modified
 			exdate = event.exdate.map{ |x| x.to_time}
+			# @elliott: edit the lines below
 			new_events = event.occurrences_between( r0, r1)
 				.select{ |x| ! exdate.include?( x.start_time - 5*3600)}
 				#.select{ |x| ! exdate.include?( x.start_time)}
